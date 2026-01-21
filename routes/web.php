@@ -14,7 +14,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('app.view.profile');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('app.update.profile');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/password', [\App\Http\Controllers\Auth\PasswordController::class, 'update'])->name('app.update.password');
     Route::get('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])->name('app.logout');
 });
 

@@ -107,8 +107,10 @@
                                                 </div>
                                             </div>
 
-                                            <form action="" method="POST">
+                                            <form action="{{route('app.update.password')}}" method="POST">
                                                 @csrf
+                                                @method('patch')
+
                                                 <div class="card-body mb-0">
                                                     <div class="form-group mb-3 row">
                                                         <label class="form-label">Old Password</label>
