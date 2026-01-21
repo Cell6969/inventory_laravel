@@ -15,13 +15,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])->name('app.logout');
 });
 
 
 Route::middleware('guest')->group(function () {
-    Route::get('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])->name('app.logout');
-    Route::get('/login', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'create'])->name('app.view.login');
-    Route::post('/login', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store'])->name('app.store.login');
+    Route::get('/login', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('/login', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store2FA'])->name('app.store.login');
+    Route::get('/verification-login', [\App\Http\Controllers\Auth\VerificationTwoFactorController::class, 'show'])->name('app.view.verification.login');
+    Route::post('/verification-login', [\App\Http\Controllers\Auth\VerificationTwoFactorController::class, 'store'])->name('app.store.verification.login');
     Route::get('/register', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'create'])->name('app.view.register');
     Route::post('/register', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'store'])->name('app.store.register');
     Route::get('/forgot-password', [\App\Http\Controllers\Auth\PasswordResetLinkController::class, 'create'])->name('app.view.forgot.password');

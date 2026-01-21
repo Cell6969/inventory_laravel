@@ -54,7 +54,7 @@
                                 </form>
 
                                 <div class="text-center text-muted mb-4">
-                                    <p class="mb-0">Remember Account ?<a class='text-primary ms-2 fw-medium' href='{{route('app.view.login')}}'>Log In</a></p>
+                                    <p class="mb-0">Remember Account ?<a class='text-primary ms-2 fw-medium' href='{{route('login')}}'>Log In</a></p>
                                 </div>
                             </div>
                         </div>
