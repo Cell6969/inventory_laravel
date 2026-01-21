@@ -51,7 +51,7 @@
 
                                     <div class="form-group mb-3">
                                         <div class="col-sm-6">
-                                            <a class='text-muted fs-14' href=''>Forgot password?</a>
+                                            <a class='text-muted fs-14' href='{{route('app.view.forgot.password')}}'>Forgot password?</a>
                                         </div>
                                     </div>
 

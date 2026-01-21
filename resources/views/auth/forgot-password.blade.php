@@ -1,25 +1,94 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Forgot Password | Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
+
+    <!-- App css -->
+    <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons -->
+    <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body class="bg-white">
+<!-- Begin page -->
+<div class="account-page">
+    <div class="container-fluid p-0">
+        <div class="row align-items-center g-0">
+            <div class="col-xl-5">
+                <div class="row">
+                    <div class="col-md-7 mx-auto">
+                        <div class="mb-0 border-0 p-md-5 p-lg-0 p-4">
+                            <div class="mb-4 p-0">
+                                <a href="index.html" class="auth-logo">
+                                    <img src="{{asset('assets/images/logo-dark.png')}}" alt="logo-dark" class="mx-auto" height="28" />
+                                </a>
+                            </div>
+
+                            <div class="pt-0">
+                                <form action="{{route('app.store.forgot.password')}}" class="my-4" method="POST">
+                                    @csrf
+                                    <div class="form-group mb-3">
+                                        <label for="emailaddress" class="form-label">Email address</label>
+                                        <input class="form-control" type="email" id="email" name="email" required="" placeholder="Enter your email">
+                                        @error('email')
+                                        <small class="text-danger">{{$message}}</small>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group mb-0 row">
+                                        <div class="col-12">
+                                            <div class="d-grid">
+                                                <button class="btn btn-primary" type="submit"> Reset Password</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div class="text-center text-muted mb-4">
+                                    <p class="mb-0">Remember Account ?<a class='text-primary ms-2 fw-medium' href='{{route('app.view.login')}}'>Log In</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-7">
+                <div class="account-page-bg p-md-5 p-4">
+                    <div class="text-center">
+                        <h3 class="text-dark mb-3 pera-title">Quick, Effective, and Productive With Tapeli Admin Dashboard</h3>
+                        <div class="auth-image">
+                            <img src="{{asset('assets/images/authentication.svg')}}" class="mx-auto img-fluid"  alt="images">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!-- END wrapper -->
 
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
+<!-- Vendor -->
+<script src="{{asset('assets/libs/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
+<script src="{{asset('assets/libs/node-waves/waves.min.js')}}"></script>
+<script src="{{asset('assets/libs/waypoints/lib/jquery.waypoints.min.js')}}"></script>
+<script src="{{asset('assets/libs/jquery.counterup/jquery.counterup.min.js')}}"></script>
+<script src="{{asset('assets/libs/feather-icons/feather.min.js')}}"></script>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+<!-- App js-->
+<script src="{{asset('assets/js/app.js')}}"></script>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</body>
+</html>
