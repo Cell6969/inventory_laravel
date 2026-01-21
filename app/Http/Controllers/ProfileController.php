@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
@@ -16,8 +17,8 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
+        return view('pages.profile', [
+            'user' => Auth::user()
         ]);
     }
 
@@ -26,15 +27,40 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $validated = $request->validated();
+        $user = Auth::user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('photo'), $filename);
+
+            // check if user has old photo
+            if ($user->photo) {
+                $this->deleteOldPhoto($user->photo);
+            }
+            $validated['photo'] = $filename;
         }
 
-        $request->user()->save();
+        $user->update($validated);
+        $notification = array(
+            'message' => 'Your profile has been updated.',
+            'alert-type' => 'success'
+        );
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return back()->with($notification);
+    }
+
+    /**
+     * Delete Old Photo
+     */
+    private function deleteOldPhoto(string $file) : void
+    {
+        $fullPath = public_path('photo/' . $file);
+
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
     }
 
     /**
