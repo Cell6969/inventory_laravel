@@ -32,4 +32,18 @@ Route::middleware('guest')->group(function () {
     Route::post('/reset-password', [\App\Http\Controllers\Auth\NewPasswordController::class, 'store'])->name('app.store.reset.password');
 });
 
+// Feature
+Route::middleware('auth')->group(function () {
+   Route::controller(\App\Http\Controllers\Feature\BrandController::class)->group(function () {
+       Route::prefix('brands')->group(function () {
+           Route::get('/all', 'view')->name('app.brands.all');
+           Route::get('/create', 'viewCreate')->name('app.brands.create');
+           Route::post('/create', 'store')->name('app.brands.store');
+           Route::get('/edit/{id}', 'viewEdit')->name('app.brands.edit');
+           Route::put('/edit/{id}', 'update')->name('app.brands.update');
+           Route::delete('/delete/{id}', 'remove')->name('app.brands.delete');
+       });
+   });
+});
+
 require __DIR__.'/auth.php';

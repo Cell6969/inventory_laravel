@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Inventory Management</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset("assets/images/favicon.ico")}}">
 
+    <!-- Datatables css -->
+    <link href="{{asset("assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css")}}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{asset('assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{asset('assets/libs/datatables.net-keytable-bs5/css/keyTable.bootstrap5.min.css')}}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{asset('assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{asset('assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet"
+          type="text/css"/>
+
     <!-- App css -->
-    <link href="{{asset("assets/css/app.min.css")}}" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="{{asset("assets/css/app.min.css")}}" rel="stylesheet" type="text/css" id="app-style"/>
 
     <!-- Icons -->
-    <link href="{{asset("assets/css/icons.min.css")}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset("assets/css/icons.min.css")}}" rel="stylesheet" type="text/css"/>
 
     {{--  Toastr  --}}
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 </head>
 
 <!-- body start -->
@@ -71,6 +83,10 @@
 <!-- Widgets Init Js -->
 <script src="{{asset("assets/js/pages/analytics-dashboard.init.js")}}"></script>
 
+<!-- Sweet Alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{{asset('assets/js/code.js') }}"></script>
+
 <!-- App js-->
 <script src="{{asset("assets/js/app.js")}}"></script>
 
@@ -79,7 +95,7 @@
 <script>
     @if(Session::has('message'))
     var type = "{{ Session::get('alert-type','info') }}"
-    switch(type){
+    switch (type) {
         case 'info':
             toastr.info(" {{ Session::get('message') }} ");
             break;
@@ -98,5 +114,14 @@
     }
     @endif
 </script>
+
+<!-- Datatables js -->
+<script src="{{asset("assets/libs/datatables.net/js/jquery.dataTables.min.js")}}"></script>
+
+<!-- dataTables.bootstrap5 -->
+<script src="{{asset("assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js")}}"></script>
+<script src="{{asset("assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js")}}"></script>
+<!-- Datatable Demo App Js -->
+<script src="{{asset("assets/js/pages/datatable.init.js")}}"></script>
 </body>
 </html>
