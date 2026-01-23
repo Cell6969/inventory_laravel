@@ -65,6 +65,21 @@
                         </ul>
                     </div>
                 </li>
+                {{--       Vendor         --}}
+                <li>
+                    <a href="#sidebarAuth" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span> Manage Vendor </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarAuth">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{route('app.vendors.all')}}" class="tp-link">All Vendors</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
                 <li>
                     <a href="#sidebarError" data-bs-toggle="collapse">
@@ -140,6 +155,5 @@
         <!-- End Sidebar -->
 
         <div class="clearfix"></div>
-
     </div>
 </div>

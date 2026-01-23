@@ -55,6 +55,17 @@ Route::middleware('auth')->group(function () {
            Route::delete('/delete/{id}', 'remove')->name('app.warehouses.delete');
        });
    });
+
+   Route::controller(\App\Http\Controllers\Feature\VendorController::class)->group(function () {
+      Route::prefix('vendors')->group(function () {
+          Route::get('/all', 'view')->name('app.vendors.all');
+          Route::get('/create', 'viewCreate')->name('app.vendors.create');
+          Route::post('/create', 'store')->name('app.vendors.store');
+          Route::get('/edit/{id}', 'viewEdit')->name('app.vendors.edit');
+          Route::put('/edit/{id}', 'update')->name('app.vendors.update');
+          Route::delete('/delete/{id}', 'remove')->name('app.vendors.delete');
+      });
+   });
 });
 
 require __DIR__.'/auth.php';
