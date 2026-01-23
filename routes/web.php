@@ -44,6 +44,17 @@ Route::middleware('auth')->group(function () {
            Route::delete('/delete/{id}', 'remove')->name('app.brands.delete');
        });
    });
+
+   Route::controller(\App\Http\Controllers\Feature\WarehouseController::class)->group(function () {
+       Route::prefix('warehouses')->group(function () {
+           Route::get('/all', 'view')->name('app.warehouses.all');
+           Route::get('/create', 'viewCreate')->name('app.warehouses.create');
+           Route::post('/create', 'store')->name('app.warehouses.store');
+           Route::get('/edit/{id}', 'viewEdit')->name('app.warehouses.edit');
+           Route::put('/edit/{id}', 'update')->name('app.warehouses.update');
+           Route::delete('/delete/{id}', 'remove')->name('app.warehouses.delete');
+       });
+   });
 });
 
 require __DIR__.'/auth.php';

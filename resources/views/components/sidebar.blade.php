@@ -35,7 +35,7 @@
                 </li>
 
                 <li class="menu-title">Pages</li>
-
+                {{--       Brand         --}}
                 <li>
                     <a href="#sidebarAuth" data-bs-toggle="collapse">
                         <i data-feather="box"></i>
@@ -46,6 +46,21 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{route('app.brands.all')}}" class="tp-link">All Brand</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                {{--       Warehouse         --}}
+                <li>
+                    <a href="#sidebarAuth" data-bs-toggle="collapse">
+                        <i data-feather="archive"></i>
+                        <span> Manage Warehouse </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarAuth">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{route('app.warehouses.all')}}" class="tp-link">All Warehouse</a>
                             </li>
                         </ul>
                     </div>
