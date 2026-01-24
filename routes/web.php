@@ -34,38 +34,49 @@ Route::middleware('guest')->group(function () {
 
 // Feature
 Route::middleware('auth')->group(function () {
-   Route::controller(\App\Http\Controllers\Feature\BrandController::class)->group(function () {
-       Route::prefix('brands')->group(function () {
-           Route::get('/all', 'view')->name('app.brands.all');
-           Route::get('/create', 'viewCreate')->name('app.brands.create');
-           Route::post('/create', 'store')->name('app.brands.store');
-           Route::get('/edit/{id}', 'viewEdit')->name('app.brands.edit');
-           Route::put('/edit/{id}', 'update')->name('app.brands.update');
-           Route::delete('/delete/{id}', 'remove')->name('app.brands.delete');
-       });
-   });
+    Route::controller(\App\Http\Controllers\Feature\BrandController::class)->group(function () {
+        Route::prefix('brands')->group(function () {
+            Route::get('/all', 'view')->name('app.brands.all');
+            Route::get('/create', 'viewCreate')->name('app.brands.create');
+            Route::post('/create', 'store')->name('app.brands.store');
+            Route::get('/edit/{id}', 'viewEdit')->name('app.brands.edit');
+            Route::put('/edit/{id}', 'update')->name('app.brands.update');
+            Route::delete('/delete/{id}', 'remove')->name('app.brands.delete');
+        });
+    });
 
-   Route::controller(\App\Http\Controllers\Feature\WarehouseController::class)->group(function () {
-       Route::prefix('warehouses')->group(function () {
-           Route::get('/all', 'view')->name('app.warehouses.all');
-           Route::get('/create', 'viewCreate')->name('app.warehouses.create');
-           Route::post('/create', 'store')->name('app.warehouses.store');
-           Route::get('/edit/{id}', 'viewEdit')->name('app.warehouses.edit');
-           Route::put('/edit/{id}', 'update')->name('app.warehouses.update');
-           Route::delete('/delete/{id}', 'remove')->name('app.warehouses.delete');
-       });
-   });
+    Route::controller(\App\Http\Controllers\Feature\WarehouseController::class)->group(function () {
+        Route::prefix('warehouses')->group(function () {
+            Route::get('/all', 'view')->name('app.warehouses.all');
+            Route::get('/create', 'viewCreate')->name('app.warehouses.create');
+            Route::post('/create', 'store')->name('app.warehouses.store');
+            Route::get('/edit/{id}', 'viewEdit')->name('app.warehouses.edit');
+            Route::put('/edit/{id}', 'update')->name('app.warehouses.update');
+            Route::delete('/delete/{id}', 'remove')->name('app.warehouses.delete');
+        });
+    });
 
-   Route::controller(\App\Http\Controllers\Feature\VendorController::class)->group(function () {
-      Route::prefix('vendors')->group(function () {
-          Route::get('/all', 'view')->name('app.vendors.all');
-          Route::get('/create', 'viewCreate')->name('app.vendors.create');
-          Route::post('/create', 'store')->name('app.vendors.store');
-          Route::get('/edit/{id}', 'viewEdit')->name('app.vendors.edit');
-          Route::put('/edit/{id}', 'update')->name('app.vendors.update');
-          Route::delete('/delete/{id}', 'remove')->name('app.vendors.delete');
-      });
-   });
+    Route::controller(\App\Http\Controllers\Feature\VendorController::class)->group(function () {
+        Route::prefix('vendors')->group(function () {
+            Route::get('/all', 'view')->name('app.vendors.all');
+            Route::get('/create', 'viewCreate')->name('app.vendors.create');
+            Route::post('/create', 'store')->name('app.vendors.store');
+            Route::get('/edit/{id}', 'viewEdit')->name('app.vendors.edit');
+            Route::put('/edit/{id}', 'update')->name('app.vendors.update');
+            Route::delete('/delete/{id}', 'remove')->name('app.vendors.delete');
+        });
+    });
+
+    Route::controller(\App\Http\Controllers\Feature\CustomerController::class)->group(function () {
+        Route::prefix('customers')->group(function () {
+            Route::get('/', 'view')->name('app.customers.all');
+            Route::get('/create', 'viewCreate')->name('app.customers.create');
+            Route::post('/create', 'store')->name('app.customers.store');
+            Route::get('/edit/{id}', 'viewEdit')->name('app.customers.edit');
+            Route::put('/edit/{id}', 'update')->name('app.customers.update');
+            Route::delete('/delete/{id}', 'remove')->name('app.customers.delete');
+        });
+    });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

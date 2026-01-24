@@ -99,7 +99,7 @@ class BrandController extends Controller
     {
         $brand = Brand::query()->findOrFail($id);
 
-        if (file_exists(public_path($brand->image))) {
+        if (!empty($brand->image) && file_exists(public_path($brand->image))) {
             unlink($brand->image);
         }
 
