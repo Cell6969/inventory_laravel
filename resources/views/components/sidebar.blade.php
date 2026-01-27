@@ -95,6 +95,21 @@
                         </ul>
                     </div>
                 </li>
+                {{--       Product Category         --}}
+                <li>
+                    <a href="#sidebarAuth" data-bs-toggle="collapse">
+                        <i data-feather="box"></i>
+                        <span> Manage Product </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarAuth">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{route('app.product-categories.all')}}" class="tp-link">Categories</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
                 <li>
                     <a href="#sidebarError" data-bs-toggle="collapse">
