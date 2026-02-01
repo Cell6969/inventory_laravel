@@ -94,6 +94,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', 'viewCreate')->name('app.products.create');
             Route::post('/create', 'store')->name('app.products.store');
             Route::get('/edit/{id}', 'viewEdit')->name('app.products.edit');
+            Route::get('/show/{id}', 'viewShow')->name('app.products.show');
             Route::put('/edit/{id}', 'update')->name('app.products.update');
             Route::delete('/delete/{id}', 'remove')->name('app.products.delete');
         });

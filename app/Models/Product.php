@@ -21,4 +21,14 @@ class Product extends Model
     {
         return $this->belongsTo(Warehouse::class, 'warehouse_id', 'id');
     }
+
+    public function vendor(): BelongsTo
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id', 'id');
+    }
+
+    public function product_category(): BelongsTo
+    {
+        return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
+    }
 }

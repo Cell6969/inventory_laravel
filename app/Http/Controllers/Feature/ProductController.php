@@ -68,6 +68,14 @@ class ProductController extends Controller
         return view('pages.feature.product-edit', compact(
             'product', 'brands', 'categories', 'vendors', 'warehouses', 'product_images'));
     }
+
+    public function viewShow(Request $request,int $id): View
+    {
+        $product = Product::findOrFail($id);
+        $product_images = ProductImage::where('product_id', $id)->get();
+        return view('pages.feature.product-show', compact('product', 'product_images'));
+    }
+
     public function update(UpdateProductRequest $request, int $id): RedirectResponse
     {
         $validated = $request->except('image');

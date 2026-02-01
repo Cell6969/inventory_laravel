@@ -55,7 +55,7 @@
                                         <td>Rp. {{$item->price}}</td>
                                         <td>{{$item->quantity}}</td>
                                         <td>
-                                            <a href="{{route('app.vendors.edit', $item->id)}}" class="btn btn-success btn-sm">
+                                            <a href="{{route('app.products.show', $item->id)}}" class="btn btn-success btn-sm">
                                                 <span class="mdi mdi-eye"></span>
                                             </a>
                                             <a href="{{route('app.products.edit', $item->id)}}" class="btn btn-info btn-sm">
