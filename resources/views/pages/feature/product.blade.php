@@ -55,13 +55,16 @@
                                         <td>Rp. {{$item->price}}</td>
                                         <td>{{$item->quantity}}</td>
                                         <td>
-                                            <button type="button" class="btn btn-info btn-sm" id="{{$item->id}}" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="categoryEdit(this.id)">
-                                                Edit
-                                            </button>
-                                            <form action="{{ route('app.product-categories.delete', $item->id) }}" method="POST" id="deleteForm{{ $item->id }}" style="display: inline;">
+                                            <a href="{{route('app.vendors.edit', $item->id)}}" class="btn btn-success btn-sm">
+                                                <span class="mdi mdi-eye"></span>
+                                            </a>
+                                            <a href="{{route('app.products.edit', $item->id)}}" class="btn btn-info btn-sm">
+                                                <span class="mdi mdi-book-edit"></span>
+                                            </a>
+                                            <form action="{{ route('app.products.delete', $item->id) }}" method="POST" id="deleteForm{{ $item->id }}" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" id="delete">Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" id="delete"><span class="mdi mdi-delete"></span></button>
                                             </form>
                                         </td>
                                     </tr>
