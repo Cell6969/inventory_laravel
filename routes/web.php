@@ -87,6 +87,14 @@ Route::middleware('auth')->group(function () {
           Route::delete('/delete/{id}', 'remove')->name('app.product-categories.delete');
        });
     });
+
+    Route::controller(\App\Http\Controllers\Feature\ProductController::class)->group(function () {
+        Route::prefix('products')->group(function () {
+            Route::get('/', 'view')->name('app.products.all');
+            Route::get('/create', 'viewCreate')->name('app.products.create');
+            Route::post('/create', 'store')->name('app.products.store');
+        });
+    });
 });
 
 require __DIR__ . '/auth.php';
