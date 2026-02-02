@@ -99,6 +99,16 @@ Route::middleware('auth')->group(function () {
             Route::delete('/delete/{id}', 'remove')->name('app.products.delete');
         });
     });
+
+    Route::controller(\App\Http\Controllers\Feature\PurchaseController::class)->group(function () {
+        Route::prefix('purchases')->group(function () {
+            Route::get('/', 'view')->name('app.purchases.all');
+            Route::get('/create', 'viewCreate')->name('app.purchases.create');
+        });
+    });
+
+
+    Route::get('/purchases/search', [\App\Http\Controllers\Feature\ProductController::class, 'search'])->name('app.products.search');
 });
 
 require __DIR__ . '/auth.php';

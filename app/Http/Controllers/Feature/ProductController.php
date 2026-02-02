@@ -11,6 +11,7 @@ use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\Vendor;
 use App\Models\Warehouse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -110,6 +111,24 @@ class ProductController extends Controller
         );
 
         return back()->with($notification);
+    }
+
+    public function search(Request $request) : JsonResponse
+    {
+        $query  = $request->input('q');
+        $warehouse_id = $request->input('warehouse_id');
+
+        $products = Product::where('warehouse_id', '=', $warehouse_id)
+            ->where(function ($q) use ($query) {
+                $q->where('name', 'ilike', '%' . $query . '%')
+                    ->orWhere('code', 'ilike', '%' . $query . '%');
+            })
+            ->select(['id', 'name', 'code', 'price', 'quantity'])
+            ->limit(10)
+            ->get();
+
+        return response()->json($products);
+
     }
 
     /**
