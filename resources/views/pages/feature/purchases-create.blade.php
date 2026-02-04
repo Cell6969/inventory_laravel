@@ -103,7 +103,7 @@
                                                         <thead>
                                                         <tr role="row">
                                                             <th>Product</th>
-                                                            <th>Net Unit Cost</th>
+                                                            <th>Unit Cost</th>
                                                             <th>Stock</th>
                                                             <th>Qty</th>
                                                             <th>Discount</th>
@@ -232,5 +232,5 @@
     <script>
         const productSearchUrl = "{{route('app.products.search')}}"
     </script>
-    <script src="{{asset('assets/js/searchProduct.js')}}"></script>
+    <script src="{{asset('assets/js/purchase.js')}}"></script>
 @endsection

@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let stock = parseInt(productElement.getAttribute('data-stock'));
 
         if (document.querySelector(`tr[data-id="${productId}"]`)) {
-            alert('Product already added');
+            toastr.warning("Item already added");
             return;
         }
 
@@ -158,6 +158,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 updateTotal();
             });
         });
+
+
+        document.getElementById('inputDiscount').addEventListener('input', function () {
+            updateTotal();
+        })
+
+        document.getElementById('inputShipping').addEventListener('input', function () {
+            updateTotal();
+        })
     }
 
 
@@ -192,8 +201,113 @@ document.addEventListener('DOMContentLoaded', function () {
             total = 0;
         }
 
+
+        document.getElementById('displayDiscount').textContent = `TK ${discount.toFixed(2)}`;
+        if (discount > 0) {
+            document.getElementById('displayDiscount').classList.add(`text-danger`);
+        } else {
+            document.getElementById('displayDiscount').classList.remove(`text-danger`);
+        }
+
+
+        document.getElementById('shippingDisplay').textContent = `TK ${shipping.toFixed(2)}`;
         document.getElementById('total').textContent = `TK ${total.toFixed(2)}`;
         document.querySelector("input[name='total']").value = total.toFixed(2);
 
     }
+
+
+    //  Modal
+    let modal = document.createElement('div');
+    modal.id = "customModal";
+    modal.style.position = "fixed";
+    modal.style.top = "0";
+    modal.style.left = "0";
+    modal.style.width = "100%";
+    modal.style.height = "100%";
+    modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    modal.style.display = "none";
+    modal.style.justifyContent = "center";
+    modal.style.alignItems = "center";
+    modal.style.zIndex = "1000";
+
+    modal.innerHTML = `
+      <div style="background: white; padding: 20px; border-radius: 5px; width: 400px;">
+          <h3 id="modalTitle"></h3>
+          <label>Product Price: <span class="text-danger">*</span></label>
+          <input type="number" id="modalPrice" class="form-control mb-3" />
+
+          <label>Discount Type: <span class="text-danger">*</span></label>
+          <select id="modalDiscountType" class="form-control mb-3">
+              <option value="">Select Discount</option>
+              <option value="fixed">Fixed</option>
+              <option value="percentage">Percentage</option>
+          </select>
+
+          <label>Discount: <span class="text-danger">*</span></label>
+          <input type="number" id="modalDiscount" class="form-control mb-3" value="0" />
+
+          <div style="margin-top: 15px; text-align: right;">
+              <button id="closeModal" class="btn btn-secondary">Close</button>
+              <button id="saveChanges" class="btn btn-primary">Save Changes</button>
+          </div>
+      </div>
+  `;
+
+    document.body.appendChild(modal);
+
+    document.addEventListener("click", function (event) {
+        if (event.target.closest(".edit-discount-btn")) {
+            let button = event.target.closest(".edit-discount-btn");
+            let productId = button.getAttribute("data-id");
+            let productName = button.getAttribute("data-name");
+            let productPrice = button.getAttribute("data-cost");
+
+            // Set modal values
+            document.getElementById("modalTitle").innerText = productName;
+            document.getElementById("modalPrice").value =productPrice;
+            modal.setAttribute("data-id", productId); // Store productId in modal
+
+            // Show modal
+            modal.style.display = "flex";
+        }
+    });
+
+    // Close Modal
+    document.getElementById("closeModal").addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // Save
+    document.getElementById('saveChanges').addEventListener('click', function () {
+        let updatedPrice = parseFloat(document.getElementById('modalPrice').value);
+        let discountValue = parseFloat(document.getElementById('modalDiscount').value) || 0;
+        let discountType = document.getElementById("modalDiscountType").value;
+        let productId = modal.getAttribute("data-id");
+        let row = document.querySelector(`tr[data-id="${productId}"]`);
+
+        if (row) {
+            let priceCell = row.querySelector("td:nth-child(2)");
+            let qtyInput = row.querySelector(".qty-input");
+            let discountInput = row.querySelector(".discount-input");
+            let subtotalCell = row.querySelector(".subtotal");
+
+            // Update price in table
+            priceCell.innerText = updatedPrice.toFixed(2);
+            qtyInput.setAttribute("data-cost", updatedPrice);
+
+            // Set discount value
+            discountInput.value = discountValue.toFixed(2);
+
+            // Apply discount calculation
+            let qty = parseFloat(qtyInput.value);
+            let discountAmount = discountType === "percentage" ? (updatedPrice * qty * (discountValue / 100)) : discountValue;
+            let subtotal = (updatedPrice * qty) - discountAmount;
+
+            subtotalCell.innerText = subtotal.toFixed(2);
+
+            modal.style.display = "none";
+            updateTotal();
+        }
+    })
 })
